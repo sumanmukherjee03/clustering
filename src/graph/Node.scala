@@ -2,21 +2,21 @@ package graph
 
 import scala.collection.mutable._
 
-class Node[T <: NumberLikeInt](data: T) {
-	var _value: T = data
+class Node[T <: Double](data: Point[T]) {
+	var _element: Point[T] = data
 	var _children = new LinkedList[Node[T]]()
 	
-	def value: T = _value
+	def element: Point[T] = _element
 	
-	def value_=(x: T) = { _value = x }
+	def element_=(x: Point[T]) = { _element = x }
 	
 	def children: LinkedList[Node[T]] = _children
 	
 	def addChild(item: Node[T]) = { _children = _children :+ item }
 	
-	def leftChildren: LinkedList[Node[T]] = { children.filter((node: Node[T]) => {node.value < value}) }
+	def leftChildren: LinkedList[Node[T]] = { children.filter((node: Node[T]) => { node.element < element }) }
 	
-	def rightChildren: LinkedList[Node[T]] = { children.filter((node: Node[T]) => {node.value > value}) }
+	def rightChildren: LinkedList[Node[T]] = { children.filter((node: Node[T]) => { node.element > element }) }
 	
 	def isLeaf: Boolean = _children.isEmpty
 }
